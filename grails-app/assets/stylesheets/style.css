@@ -1,0 +1,240 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+    font-family: Inconsolata, Consolas, "Courier New", monospace;
+}
+
+.middle {
+    flex: 2;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+header {
+}
+
+footer {
+    margin: 1rem;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 3 1 0;
+    padding: 2rem;
+}
+
+section, .deco {
+    flex: 1 1 0;
+}
+
+main > section {
+    flex: 3 1 0;
+}
+
+main > aside{
+    flex: 1 1 0;
+    min-width: 8.4rem;
+    border: 1px solid grey;
+    margin: 1rem;
+    padding: 1rem 1rem 1rem 0;
+    border-radius: 2rem;
+}
+
+main > aside > h3 {
+    margin-left: 1rem;
+}
+
+input[type="submit"], button {
+    float: right;
+    border-radius: 1rem;
+    width: 5rem;
+    height: 3rem;
+    background-color: red;
+    border-top-color: lightcoral;
+    border-left-color: lightcoral;
+    border-right-color: darkred;
+    border-bottom-color: darkred;
+    font-weight: bold;
+    color: white;
+}
+
+input[type="submit"]:active, button:active {
+    border-top-color: darkred;
+    border-left-color: darkred;
+    border-right-color: lightcoral;
+    border-bottom-color: lightcoral;
+}
+
+.deco {
+    position: relative;
+    z-index: -100;
+    overflow: hidden;
+}
+.stone_anim {
+    display: block !important; /* animation tries to overwrite this */
+}
+
+.board {
+}
+
+.board_row {
+    display: flex;
+    margin: 0;
+}
+
+.board_cell {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 0;
+}
+
+.cell_c1 {
+    border-left: 1px solid black;
+}
+.cell_r1 {
+    border-top: 1px solid black;
+}
+
+.stone {
+    border-radius: 50%;
+    margin: 0.3rem;
+    width: 5rem;
+    height: 5rem;
+}
+.stone_p0 {
+    border: 1px solid lightgrey;
+}
+.stone_p1 {
+    background-color: blue;
+}
+.stone_p-1 {
+    background-color: red;
+}
+.stone_next_p1 {
+    border: 1px solid blue;
+    cursor: pointer;
+}
+.stone_next_p-1 {
+    border: 1px solid red;
+    cursor: pointer;
+}
+.overlay {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+.dialog {
+    position: relative;
+    background-color: white;
+    border-radius: 1rem;
+    width: 30vw;
+    margin: 25vh auto;
+    padding: 1rem;
+    display: none;
+}
+.wait {
+    z-index: 2;
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+.wait > div {
+    margin: 45vh auto;
+    width: 15rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: solid black 1px;
+}
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+.wait .spinner {
+    border-radius: 50%;
+    border: solid gray 3px;
+    border-left: solid darkgray 3px;
+    margin: 0 auto;
+    width: 3rem;
+    height: 3rem;
+    animation: spinner 0.8s linear infinite;
+}
+
+@media screen and (max-width: 800px) {
+    .stone {
+        width: 3rem;
+        height: 3rem;
+    }
+    .deco {
+        display: none;
+    }
+    .dialog {
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .stone {
+        width: 2.3rem;
+        height: 2.3rem;
+    }
+    .deco {
+        display: none;
+    }
+    .dialog {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .stone {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    .deco {
+        display: none;
+    }
+    .dialog {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+    }
+}
+/*
+There are some issues with starting the animation multiple times.
+Therefore we do it with jQuery instead of css animation.
+@-webkit-keyframes fade_in {
+    0%   {opacity: 0;}
+    100% {opacity: 100;}
+}
+@keyframes fade_in {
+    0%   {opacity: 0;}
+    100% {opacity: 100;}
+}
+.stone_new {
+    animation: fade_in;
+    animation-duration: 2s;
+}*/
